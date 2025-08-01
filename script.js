@@ -83,7 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const playPromise = music.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {
-                document.addEventListener('scroll', () => {
+                document.addEventListener('click', () => {
                     music.muted = false;
                     music.play();
                 }, { once: true });
