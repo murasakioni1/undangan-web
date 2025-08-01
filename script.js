@@ -75,3 +75,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // musicPlayer.play().catch(e => console.log("Auto-play prevented:", e));
     }
 });
+
+const music = document.getElementById('bg-music');
+if (music) {
+    // Coba unmute dan play ketika DOM siap
+    const tryPlay = () => {
+        music.muted = false;
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // Jika gagal (karena autoplay policy), tunggu klik pertama
+                document.addEventListener('click', () => {
+                    music.muted = false;
+                    music.play();
+                }, { once: true });
+            });
+        }
+    };
+
+    tryPlay();
+}
