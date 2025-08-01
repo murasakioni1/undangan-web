@@ -76,22 +76,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-const music = document.getElementById('bg-music');
-if (music) {
-    // Coba unmute dan play ketika DOM siap
-    const tryPlay = () => {
+window.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('bg-music');
+    if (music) {
         music.muted = false;
         const playPromise = music.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {
-                // Jika gagal (karena autoplay policy), tunggu klik pertama
                 document.addEventListener('click', () => {
                     music.muted = false;
                     music.play();
                 }, { once: true });
             });
         }
-    };
-
-    tryPlay();
-}
+    }
+});
